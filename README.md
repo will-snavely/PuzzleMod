@@ -40,7 +40,7 @@ have Slay the Spire installed through Steam. This should
 work on both Windows and Linux, though this has not been
 heavily tested.
 
-### Install ModTheSpire and BaseMod through Steam Workshop
+### Install Steam Workshop Dependencies
 You should install Mod the Spire, BaseMod, and StSLib through
 Steam Workshop. This is done by "subscribing" to the
 respective pages of these tools:
