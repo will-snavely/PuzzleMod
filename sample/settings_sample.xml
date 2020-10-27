@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <profiles>
+        <profile>
+            <id>inject-sts-steam-props</id>
+            <properties>
+                <steam-home>C:/Program Files (x86)/Steam/</steam-home>
+                <steam-workshop>${steam-home}/steamapps/workshop/content/</steam-workshop>
+                <sts-home>${steam-home}/steamapps/common/SlayTheSpire</sts-home>
+                <sts-jar>${sts-home}/desktop-1.0.jar</sts-jar>
+                <basemod-jar>${steam-workshop}/646570/1605833019/BaseMod.jar</basemod-jar>
+                <mts-jar>${steam-workshop}/646570/1605060445/ModTheSpire.jar</mts-jar>
+                <stslib-jar>${steam-workshop}/646570/1609158507/StSLib.jar</stslib-jar>
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>inject-sts-steam-props</activeProfile>
+    </activeProfiles>
+</settings>
