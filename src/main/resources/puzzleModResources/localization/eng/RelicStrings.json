@@ -1,0 +1,16 @@
+{
+  "puzzleMod:CursedCornerPiece": {
+    "NAME": "Cursed Corner Piece",
+    "FLAVOR": "You sense that it's mocking you.",
+    "DESCRIPTIONS": [
+      "You no longer receive card rewards."
+    ]
+  },
+  "puzzleMod:BagOfPieces": {
+    "NAME": "Bag of Pieces",
+    "FLAVOR": "You wouldn't want to lose a piece.",
+    "DESCRIPTIONS": [
+      "Stores your collection of puzzle pieces."
+    ]
+  }
+}

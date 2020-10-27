@@ -1,0 +1,46 @@
+{
+  "puzzleMod:SlaverStrike": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! Damage."
+  },
+  "puzzleMod:SlaverBlock": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "puzzleMod:SmallSlap": {
+    "NAME": "Small Slap",
+    "DESCRIPTION": "Deal !D! Damage."
+  },
+  "puzzleMod:MediumSlap": {
+    "NAME": "Medium Slap",
+    "DESCRIPTION": "Deal !D! Damage."
+  },
+  "puzzleMod:BigSlap": {
+    "NAME": "Big Slap",
+    "DESCRIPTION": "Deal !D! Damage."
+  },
+  "puzzleMod:SmallShield": {
+    "NAME": "Small Shield",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "puzzleMod:MediumShield": {
+    "NAME": "Medium Shield",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "puzzleMod:BigShield": {
+    "NAME": "Big Shield",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "puzzleMod:SmallBuff": {
+    "NAME": "Swole",
+    "DESCRIPTION": "Gain !M! strength."
+  },
+  "puzzleMod:MediumBuff": {
+    "NAME": "Swoler",
+    "DESCRIPTION": "Gain !M! strength."
+  },
+  "puzzleMod:BigBuff": {
+    "NAME": "Swolest",
+    "DESCRIPTION": "Gain !M! strength."
+  }
+}

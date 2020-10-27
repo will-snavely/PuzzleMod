@@ -1,0 +1,531 @@
+{
+  "name": "Demo",
+  "puzzles": [
+    {
+      "name": "Simple Attack",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Strike_R"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 20,
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 6,
+          "fade": 0,
+          "damage": 20,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "entranceDialog": "It will be years before you can strike me!",
+          "deathDialog": "I can't believe you've done this.",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Simple Defend",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Defend_R"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 20,
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 6,
+          "fade": 1,
+          "damage": 24,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "entranceDialog": "I'm all in...",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Simple Potion",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Strike_R"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 20,
+      "potions": [
+        {
+          "key": "Fire Potion"
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 26,
+          "fade": 1,
+          "damage": 20,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "entranceDialog": "Now I'm strike-proof!",
+          "deathDialog": "...",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Simple Relic",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Thunderclap"
+        },
+        {
+          "key": "Sword Boomerang"
+        },
+        {
+          "key": "Strike_R"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 20,
+      "relics": [
+        {
+          "key": "Akabeko"
+        }
+      ],
+      "potions": [],
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 46,
+          "damage": 24,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "entranceDialog": "Take this!",
+          "deathDialog": "I'm allergic to beef...",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Simple Exhaust",
+      "masterHandSize": 2,
+      "startingDrawPile": [
+        {
+          "key": "Exhume"
+        },
+        {
+          "key": "Reaper"
+        },
+        {
+          "key": "Defend_R"
+        },
+        {
+          "key": "Defend_R"
+        }
+      ],
+      "startingExhaustPile": [
+        {
+          "key": "Offering"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 3,
+      "potions": [],
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 20,
+          "damage": 10,
+          "fade": 1,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "entranceDialog": "Your options have been exhausted!",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Fiend Fire",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Battle Trance"
+        },
+        {
+          "key": "Shrug It Off"
+        },
+        {
+          "key": "Pommel Strike"
+        },
+        {
+          "key": "Strike_R"
+        },
+        {
+          "key": "Strike_R"
+        },
+        {
+          "key": "Defend_R"
+        },
+        {
+          "key": "Defend_R"
+        },
+        {
+          "key": "Defend_R"
+        },
+        {
+          "key": "Fiend Fire"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 20,
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 50,
+          "damage": 75,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Second Wind",
+      "masterHandSize": 7,
+      "startingDrawPile": [
+        {
+          "key": "Second Wind"
+        },
+        {
+          "key": "Power Through"
+        },
+        {
+          "key": "Armaments"
+        },
+        {
+          "key": "Armaments"
+        },
+        {
+          "key": "Seeing Red"
+        },
+        {
+          "key": "Defend_R"
+        },
+        {
+          "key": "Defend_R"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 17,
+      "curHp": 17,
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 6,
+          "fade": 1,
+          "damage": 75,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Defend Medium",
+      "masterHandSize": 7,
+      "startingDrawPile": [
+        {
+          "key": "Warcry"
+        },
+        {
+          "key": "Sentinel"
+        },
+        {
+          "key": "Havoc"
+        },
+        {
+          "key": "Entrench"
+        },
+        {
+          "key": "Exhume"
+        },
+        {
+          "key": "Feel No Pain"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 14,
+      "curHp": 14,
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 40,
+          "fade": 1,
+          "damage": 60,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 230.0,
+          "hb_h": 240.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 0.0,
+          "offsetY": -10.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "name": "Filled with Rage",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Whirlwind"
+        },
+        {
+          "key": "Rage"
+        },
+        {
+          "key": "Feed"
+        },
+        {
+          "key": "Strike_R"
+        },
+        {
+          "key": "Offering"
+        }
+      ],
+      "orbCount": 0,
+      "maxHp": 20,
+      "curHp": 20,
+      "monsters": [
+        {
+          "name": "Cultist",
+          "maxHp": 64,
+          "fade": 1,
+          "damage": 40,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 287,
+          "hb_h": 300,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": -230.0,
+          "offsetY": 15.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "scale": 0.8
+        },
+        {
+          "name": "Cultist",
+          "maxHp": 32,
+          "fade": 1,
+          "damage": 20,
+          "hb_x": -8.0,
+          "hb_y": 10.0,
+          "hb_w": 153,
+          "hb_h": 150.0,
+          "dialogX": -50.0,
+          "dialogY": 50.0,
+          "offsetX": 100.0,
+          "offsetY": 25.0,
+          "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+          "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+          "animation": "waving",
+          "scale": 1.5
+        }
+      ]
+    }
+  ],
+  "boss":     {
+    "name": "Boss 1",
+    "masterHandSize": 5,
+    "maxEnergy": 4,
+    "startingDrawPile": [
+      {
+        "key": "Burning Pact",
+        "upgradeCount": 1
+      },
+      {
+        "key": "Fire Breathing"
+      },
+      {
+        "key": "Finesse"
+      },
+      {
+        "key": "Reckless Charge"
+      },
+      {
+        "key": "Necronomicurse"
+      }
+    ],
+    "relics": [
+      {
+        "key": "Charon's Ashes"
+      },
+      {
+        "key": "Cursed Key"
+      }
+    ],
+    "potions": [
+      {
+        "key": "DuplicationPotion"
+      }
+    ],
+    "orbCount": 0,
+    "maxHp": 20,
+    "curHp": 20,
+    "monsters": [
+      {
+        "name": "Cultist",
+        "maxHp": 76,
+        "fade": 0,
+        "damage": 100,
+        "hb_x": -8.0,
+        "hb_y": 10.0,
+        "hb_w": 230.0,
+        "hb_h": 240.0,
+        "dialogX": -50.0,
+        "dialogY": 50.0,
+        "offsetX": -580.0,
+        "offsetY": -10.0,
+        "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+        "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+        "animation": "waving",
+        "scale": 1.0
+      },
+      {
+        "name": "Cultist",
+        "maxHp": 76,
+        "fade": 0,
+        "damage": 100,
+        "hb_x": -8.0,
+        "hb_y": 10.0,
+        "hb_w": 230.0,
+        "hb_h": 240.0,
+        "dialogX": -50.0,
+        "dialogY": 50.0,
+        "offsetX": -290.0,
+        "offsetY": -10.0,
+        "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+        "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+        "animation": "waving",
+        "scale": 1.0
+      },
+      {
+        "name": "Cultist",
+        "maxHp": 76,
+        "fade": 0,
+        "damage": 100,
+        "hb_x": -8.0,
+        "hb_y": 10.0,
+        "hb_w": 230.0,
+        "hb_h": 240.0,
+        "dialogX": -50.0,
+        "dialogY": 50.0,
+        "offsetX": 0.0,
+        "offsetY": -10.0,
+        "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+        "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+        "animation": "waving",
+        "scale": 1.0
+      },
+      {
+        "name": "Cultist",
+        "maxHp": 76,
+        "fade": 0,
+        "damage": 100,
+        "hb_x": -8.0,
+        "hb_y": 10.0,
+        "hb_w": 230.0,
+        "hb_h": 240.0,
+        "dialogX": -50.0,
+        "dialogY": 50.0,
+        "offsetX": 290.0,
+        "offsetY": -10.0,
+        "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+        "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+        "animation": "waving",
+        "scale": 1.0
+      }
+    ]
+  }
+}

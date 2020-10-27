@@ -1,0 +1,38 @@
+{
+  "puzzleMod:ThePuzzler": {
+    "NAMES": [
+      "The Puzzler",
+      "the Puzzler"
+    ],
+    "TEXT": [
+      "Can you put together the pieces?"
+    ]
+  },
+  "puzzleMod:PuzzlerNeowEvent": {
+    "TEXT": [
+      "I have a unique proposal for you...",
+      "Are you prepared for a new kind of challenge?",
+      "Excellent... ALAKAZOON! ... or was it ALAKAZAM ... well, I'm sure you'll be fine.",
+      "Bye...",
+      "Are you still here?"
+    ],
+    "OPTIONS": [
+      "[Continue]",
+      "[Accept] I am invincible!",
+      "[Reject] I'm washing my hair today.",
+      "[Ribbit] Ribbit."
+    ]
+  },
+  "puzzleMod:PuzzlerVictoryEvent": {
+    "TEXT": [
+      "I knew you could do it!",
+      "ALAKA...ZEE? Now, for another surprise...",
+      "Oops..."
+    ],
+    "OPTIONS": [
+      "[Ribbit] Ribbit.",
+      "[Proceed] ..."
+    ]
+  }
+}
+
