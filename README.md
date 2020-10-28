@@ -8,11 +8,15 @@ relics, potion, etc., which must be solved in
 order to progress.
 
 ## Installing
+PuzzleMod is available on Github or Steam workshop.
 
-PuzzleMod is currently only available on Github.
-You should head to the 
-[Releases](https://github.com/will-snavely/PuzzleMod/releases)
-page and download the latest version of `PuzzleMod.jar`.
+### Steam Workshop
+Subscribe to this Steam Workshop project:
+- https://steamcommunity.com/sharedfiles/filedetails/?id=2269437478
+
+### Github Releeases
+Head to the [Releases page](https://github.com/will-snavely/PuzzleMod/releases)
+and download the latest version of `PuzzleMod.jar`.
 This should then be placed in the `mods` folder of
 your Slay the Spire installation directory (if you 
 are using Steam, you can find this by right-clicking
@@ -36,7 +40,7 @@ have Slay the Spire installed through Steam. This should
 work on both Windows and Linux, though this has not been
 heavily tested.
 
-### Install ModTheSpire and BaseMod through Steam Workshop
+### Install Steam Workshop Dependencies
 You should install Mod the Spire, BaseMod, and StSLib through
 Steam Workshop. This is done by "subscribing" to the
 respective pages of these tools:
