@@ -14,7 +14,7 @@ PuzzleMod is available on Github or Steam workshop.
 Subscribe to this Steam Workshop project:
 - https://steamcommunity.com/sharedfiles/filedetails/?id=2269437478
 
-### Github Releeases
+### Github Releases
 Head to the [Releases page](https://github.com/will-snavely/PuzzleMod/releases)
 and download the latest version of `PuzzleMod.jar`.
 This should then be placed in the `mods` folder of
