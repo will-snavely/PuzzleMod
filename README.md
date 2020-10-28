@@ -153,24 +153,25 @@ Each puzzle object is specified in a json structure as follows:
     ...
   ],
 
-  # The starting discard pile. The order in which cards are listed is
-  # maintained in game.
+  # The starting draw pile. The order in which cards are listed is maintained in game.
   "startingDrawPile": [
     <card object 1>,
     ...
   ],
 
-  # The starting exhause pile.
+  # The starting exhaust pile.
   "startingExhaustPile": [
     <card object 1>,
     ...
   ],
 
+  # The player's relics
   "relics": [
     <relic object 1>,
     ...
   ],
 
+  # The player's potions
   "potions": [
     <potion object 1>,
     ...
