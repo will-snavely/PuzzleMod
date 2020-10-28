@@ -23,7 +23,7 @@ are using Steam, you can find this by right-clicking
 the game, and navigating to "Manage", then selecting
 "Browse Local Files").
 
-## Enabling
+## Running
 
 To use the mod, you must launch Slay the Spire with mods enabled, 
 then ensure that "PuzzleMod" is selected in the mod configuation
