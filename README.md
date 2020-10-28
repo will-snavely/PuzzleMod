@@ -95,8 +95,7 @@ installing, you can run:
 ## The Puzzle File Format
 Puzzles are organized into "packs", which are specified by a json file.
 This file is organized as follows. You puzzles are loaded into a single
-act (a modified Exordium). Multi-act packs are currently not supported, 
-though are certainly possible.
+act (a modified Exordium). Multi-act packs are currently not supported.
 
 Here is a [sample puzzle file](./src/main/resources/puzzleModResources/packs/starter.json).
 
