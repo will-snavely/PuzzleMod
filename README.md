@@ -87,3 +87,202 @@ to the appropriate folder in your Spire installation.
 If you just wish to build the source, without
 installing, you can run:
 - `mvn clean package`
+
+## The Puzzle File Format
+Puzzles are organized into "packs", which are specified by a json file.
+This file is organized as follows. You puzzles are loaded into a single
+act (a modified Exordium). Multi-act packs are currently not supported, 
+though are certainly possible.
+
+Here is a [sample puzzle file](./src/main/resources/puzzleModResources/packs/starter.json).
+
+### Top Level Organization
+```
+{
+  # The Mod name is shown when the Act loads
+  "name": "The name of your mod", 
+  
+  # The "puzzles" key stores the puzzles that show up in the
+  # non-boss nodes
+  "puzzles": [
+    <puzzle object 1>,
+    <puzzle object 2>,
+    ...
+  ],
+  
+  # One puzzle is designated as the boss puzzle, which means it
+  # shows up in the boss room of the act
+  "boss": {
+       <puzzle object>
+  }
+}
+```
+
+### Puzzle Objects
+Each puzzle object is specified in a json structure as follows:
+```
+{
+  # The puzzle name currently isn't used
+  "name": "Puzzle Name",
+
+  # The size of the initial hand
+  "masterHandSize": 5,
+
+  # The initial draw pile, in order. This order will be maintained
+  # when the puzzle is loaded. So the first 'masterHandSize' cards
+  # you list here will be drawn at the start of combat
+  "startingDrawPile": [
+    <card object 1>,
+    ...
+  ],
+
+  # The starting hand. Note that the player will still draw cards at the 
+  # beginning of the first turn, on top of what's specified here (unless 
+  # masterHandSize is set to 0)
+  "startingHand": [
+    <card object 1>,
+    ...
+  ],
+
+  # The starting discard pile.
+  "startingDiscardPile": [
+    <card object 1>,
+    ...
+  ],
+
+  # The starting discard pile. The order in which cards are listed is
+  # maintained in game.
+  "startingDrawPile": [
+    <card object 1>,
+    ...
+  ],
+
+  # The starting exhause pile.
+  "startingExhaustPile": [
+    <card object 1>,
+    ...
+  ],
+
+  "relics": [
+    <relic object 1>,
+    ...
+  ],
+
+  "potions": [
+    <potion object 1>,
+    ...
+  ],
+  
+  # The number of orb slots the player has
+  "orbCount": 0,
+  
+  # The player's max health
+  "maxHp": 20,
+
+  # The player's current health
+  "curHp": 20,
+
+  # A list of monsters in the room
+  "monsters": [
+    <monster object 1>,
+    ...    
+  ]
+}
+```
+
+### Card Objects
+Cards are specified with a json object as follows.
+```
+{
+  # The card key will need to be looked up from the game sources.
+  # Generally it's the English name of the card, including spaces
+  # e.g. "Perfected Strike", though there are some exceptions
+  "key": "Card Key",
+
+  # Number of times to upgrade the card.
+  "upgradeCount": 0-N
+}
+```
+
+### Monster Objects
+Monsters are specified with a json object as follows.
+```
+{
+  # The monster name
+  "name": "Monster Name",
+
+  # The monster's max HP
+  "maxHp": 6,
+
+  # How many "fade" counters should the monster have?
+  # The monster will die after this many turns. Useful for
+  # "survive" kind of puzzles
+  "fade": 0,
+
+  # How much damage does the monster do a turn?
+  "damage": 20,
+
+  # Hitbox x-position, y-position, width, and height
+  # I stole these from the game source when possible, 
+  # and in general these might take some tweaking to get
+  # right
+  "hb_x": -8.0,
+  "hb_y": 10.0,
+  "hb_w": 230.0,
+  "hb_h": 240.0,
+
+  # The relative location of the monster's dialog box
+  "dialogX": -50.0,
+  "dialogY": 50.0,
+
+  # The X and Y offset of the monster in battle screen
+  "offsetX": 0.0,
+  "offsetY": -10.0,
+
+  # Scaling factor for the monster's sprite; as far as I can tell,
+  # < 1 produces a bigger sprite, while > 1 produces a smaller one.
+  "scale": 1.0,
+
+  # Animation settings for the monster; you can reuse existing game
+  # assets here, as a starting place, or create your own. Currently
+  # only Spine animations are supported. Here we show using the 
+  # cultist animation.
+  "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+  "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+  "animation": "waving",
+
+  # What does the monster say at the start of the fight? 
+  "entranceDialog": "It will be years before you can strike me!",
+  # What does the monster say at the end of the fight? 
+  "deathDialog": "I can't believe you've done this."
+}
+```
+
+### Relic Objects
+Relics are specified with a json object as follows.
+ ```
+{
+  # The relic unique key; needs to be looked up in the game sources.
+  "key": "Relic Key",
+}
+```
+
+### Potion Objects
+Potion are specified with a json object as follows.
+```
+{
+  # The unique potion key; needs to be looked up in the game sources.
+  "key": "Potion Key",
+}
+```
+
+### Current Shortcomings 
+- Displayed strings in the puzzle file are not localized.
+- Arbitrary powers (like Weakness, Vulnerability, etc) can't be applied
+to players/monsters.
+- Initial orb configurations can't be specified.
+- Monster move sets can't be specified (they just attack every turn for
+the same amount).
+- Need better resources for looking up object keys.
+- Multi-act packs are currently not supported.
+- Probably the pack file should have a version number.
