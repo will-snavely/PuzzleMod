@@ -48,7 +48,6 @@ public class StaticAssets {
             ResourceHelper.getResourcePath("images", "ui", "piece3_outline.png"),
             ResourceHelper.getResourcePath("images", "ui", "piece4_outline.png"),
             ResourceHelper.getResourcePath("images", "ui", "piece5_outline.png"),
-
     };
 
     public static final String CURSED_CORNER =
@@ -59,5 +58,4 @@ public class StaticAssets {
             ResourceHelper.getResourcePath("images", "relics", "bag_pieces.png");
     public static final String BAG_PIECES_OUTLINE =
             ResourceHelper.getResourcePath("images", "relics", "bag_pieces_outline.png");
-
 }

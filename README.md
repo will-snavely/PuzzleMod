@@ -97,7 +97,7 @@ Puzzles are organized into "packs", which are specified by a json file.
 This file is organized as follows. Your puzzles are loaded into a single
 act (a modified Exordium). Multi-act packs are currently not supported.
 
-Here is a [sample puzzle file](./src/main/resources/puzzleModResources/packs/starter.json).
+Here is a [sample puzzle file](src/main/resources/puzzleModResources/packs/demo.json).
 
 ### Top Level Organization
 ```

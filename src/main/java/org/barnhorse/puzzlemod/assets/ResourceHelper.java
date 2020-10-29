@@ -13,4 +13,7 @@ public class ResourceHelper {
         return Paths.get(resourceRoot, parts).toString();
     }
 
+    public static String getCardImagePath(String resourceName) {
+        return ResourceHelper.getResourcePath("images", "cards", resourceName);
+    }
 }

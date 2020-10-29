@@ -11,10 +11,10 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import org.barnhorse.puzzlemod.monsters.PuzzleMonster;
-import org.barnhorse.puzzlemod.packs.Puzzle;
-import org.barnhorse.puzzlemod.packs.PuzzleMonsterInfo;
-import org.barnhorse.puzzlemod.packs.PuzzlePotion;
-import org.barnhorse.puzzlemod.packs.PuzzleRelic;
+import org.barnhorse.puzzlemod.packs.model.Puzzle;
+import org.barnhorse.puzzlemod.packs.model.PuzzleMonsterInfo;
+import org.barnhorse.puzzlemod.packs.model.PuzzlePotion;
+import org.barnhorse.puzzlemod.packs.model.PuzzleRelic;
 import org.barnhorse.puzzlemod.relics.BagOfPieces;
 import theDefault.relics.CursedCornerPiece;
 
@@ -41,15 +41,15 @@ public class PuzzleRoomAdapter {
 
     public void onPlayerEntry(AbstractPlayer player) {
         player.maxHealth = this.puzzle.maxHp;
-        player.currentHealth = this.puzzle.curHp;
+        player.currentHealth = this.puzzle.currentHp;
         player.masterDeck.clear();
         player.masterHandSize = this.puzzle.masterHandSize;
 
         if (player.maxOrbs > 0) {
             player.masterMaxOrbs = 0;
         }
-        if (puzzle.orbCount > 0) {
-            player.masterMaxOrbs = puzzle.orbCount;
+        if (puzzle.orbSlots > 0) {
+            player.masterMaxOrbs = puzzle.orbSlots;
         }
 
         List<AbstractRelic> relics = new ArrayList<>(player.relics);

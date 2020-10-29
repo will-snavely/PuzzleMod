@@ -1,4 +1,4 @@
-package org.barnhorse.puzzlemod.packs;
+package org.barnhorse.puzzlemod.packs.model;
 
 import java.util.List;
 

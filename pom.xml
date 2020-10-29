@@ -73,8 +73,7 @@
                             <artifactSet>
                                 <excludes>
                                     <exclude>basemod:*</exclude>
-                                    <exclude>com.evacipated.cardcrawl:*
-                                    </exclude>
+                                    <exclude>com.evacipated.cardcrawl:*</exclude>
                                     <exclude>com.megacrit.cardcrawl:*</exclude>
                                 </excludes>
                             </artifactSet>

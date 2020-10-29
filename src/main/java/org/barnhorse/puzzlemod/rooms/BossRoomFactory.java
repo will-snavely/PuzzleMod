@@ -4,7 +4,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import org.barnhorse.puzzlemod.characters.ThePuzzler;
 import org.barnhorse.puzzlemod.dungeons.PuzzlerExordium;
-import org.barnhorse.puzzlemod.packs.PuzzlePack;
+import org.barnhorse.puzzlemod.packs.model.PuzzlePack;
 
 public class BossRoomFactory {
     private BossRoomFactory() {

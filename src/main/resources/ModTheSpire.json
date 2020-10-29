@@ -4,7 +4,7 @@
   "author_list": ["barnhorse"],
   "description": "Adds a puzzle mode to Slay the Spire.",
   "version": "0.0.1",
-  "sts_version": "06-22-2020",
+  "sts_version": "07-30-2020",
   "mts_version": "3.16.0",
   "dependencies": ["basemod"]
 }

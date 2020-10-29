@@ -10,11 +10,9 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.exordium.Cultist;
 import com.megacrit.cardcrawl.powers.FadingPower;
-import com.megacrit.cardcrawl.relics.PreservedInsect;
 import com.megacrit.cardcrawl.vfx.SpeechBubble;
-import org.barnhorse.puzzlemod.packs.PuzzleMonsterInfo;
+import org.barnhorse.puzzlemod.packs.model.PuzzleMonsterInfo;
 
 public class PuzzleMonster extends AbstractMonster {
     private int fade;

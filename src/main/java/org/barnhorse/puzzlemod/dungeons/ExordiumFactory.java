@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.dungeons.Exordium;
 import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import org.barnhorse.puzzlemod.PuzzleMod;
 import org.barnhorse.puzzlemod.characters.ThePuzzler;
-import org.barnhorse.puzzlemod.packs.PuzzlePack;
+import org.barnhorse.puzzlemod.packs.model.PuzzlePack;
 
 import java.util.ArrayList;
 
