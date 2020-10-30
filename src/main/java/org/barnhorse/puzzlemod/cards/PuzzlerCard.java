@@ -3,7 +3,7 @@ package org.barnhorse.puzzlemod.cards;
 import basemod.abstracts.CustomCard;
 
 public abstract class PuzzlerCard extends CustomCard {
-    public PuzzlerCard( String id,
+    public PuzzlerCard(String id,
                        String name,
                        final String img,
                        final int cost,

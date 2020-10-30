@@ -8,24 +8,104 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.map.DungeonMap;
 import com.megacrit.cardcrawl.screens.DungeonMapScreen;
+import org.barnhorse.puzzlemod.assets.ResourceHelper;
 import org.barnhorse.puzzlemod.characters.ThePuzzler;
+import org.barnhorse.puzzlemod.dungeons.PuzzlerExordium;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PuzzlerDungeonMap extends DungeonMap {
-    private static Texture top;
-    private static Texture bot;
-    private static Texture blend;
+    private static PieceNode pieceGraph;
 
-    private static final float H = 1020.0F * Settings.scale;
-    private static final float BLEND_H = 512.0F * Settings.scale;
+    private class PieceNode {
+        public Texture texture;
+        public List<PieceNode> next = new ArrayList<>();
+        public boolean outie;
+
+        public PieceNode(Texture texture, boolean outie) {
+            this.texture = texture;
+            this.outie = outie;
+        }
+
+        public void shuffle() {
+            Collections.shuffle(this.next);
+        }
+    }
 
     public PuzzlerDungeonMap() {
         super();
-        if (top == null) {
-            top = ImageMaster.loadImage("images/ui/map/mapTop.png");
-            bot = ImageMaster.loadImage("images/ui/map/mapBot.png");
-            blend = ImageMaster.loadImage("images/ui/map/mapBlend.png");
+        this.setBaseMapColor(Color.CYAN);
+        if (pieceGraph == null) {
+            pieceGraph = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_bot.png")), true);
+            PieceNode none = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_none.png")), false);
+            PieceNode all = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_all.png")), true);
+            PieceNode ew = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_EW.png")), false);
+            PieceNode ews = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_EWS.png")), false);
+            PieceNode nwe = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_NWE.png")), true);
+            PieceNode nse = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_NSE.png")), true);
+            PieceNode nsw = new PieceNode(
+                    ImageMaster.loadImage(ResourceHelper.getResourcePath(
+                            "images", "ui", "map_piece_NSW.png")), true);
+
+            pieceGraph.next.add(ew);
+            pieceGraph.next.add(nwe);
+            pieceGraph.next.add(none);
+            pieceGraph.shuffle();
+
+            none.next.add(all);
+            none.next.add(nse);
+            none.next.add(nsw);
+            none.next.add(ews);
+            none.shuffle();
+
+            all.next.add(ew);
+            all.next.add(nwe);
+            all.next.add(none);
+            all.shuffle();
+
+            ew.next.add(all);
+            ew.next.add(nse);
+            ew.next.add(nsw);
+            ew.next.add(ews);
+            ew.shuffle();
+
+            ews.next.add(all);
+            ews.next.add(nse);
+            ews.next.add(nsw);
+            ews.next.add(ews);
+            ews.shuffle();
+
+            nwe.next.add(ew);
+            nwe.next.add(nwe);
+            nwe.next.add(none);
+            nwe.shuffle();
+
+            nse.next.add(ew);
+            nse.next.add(nwe);
+            nse.next.add(none);
+            nse.shuffle();
+
+            nsw.next.add(ew);
+            nsw.next.add(nwe);
+            nsw.next.add(none);
+            nsw.shuffle();
         }
     }
 
@@ -54,27 +134,41 @@ public class PuzzlerDungeonMap extends DungeonMap {
         }
     }
 
+    private void setBaseMapColor(Color color) {
+        try {
+            Field field = this.getClass().getSuperclass().getDeclaredField("baseMapColor");
+            field.setAccessible(true);
+            field.set(this, color);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to access baseMapColor", e);
+        }
+    }
+
     public void render(SpriteBatch sb) {
         if (AbstractDungeon.player == null || AbstractDungeon.player.chosenClass != ThePuzzler.Enums.THE_PUZZLER) {
             super.render(sb);
         } else {
             sb.setColor(this.getBaseMapColor());
-            sb.draw(top, 0.0F,
-                    H + DungeonMapScreen.offsetY + getMapOffsetY(),
-                    (float) Settings.WIDTH,
-                    1080.0F * Settings.scale);
-            sb.draw(bot,
-                    0.0F,
-                    -this.getMapMidDist() + DungeonMapScreen.offsetY + getMapOffsetY() + 1.0F,
-                    (float) Settings.WIDTH, 1080.0F * Settings.scale);
-            this.renderMapBlender(sb);
+            PieceNode cur = pieceGraph;
+            int puzzleCount = PuzzlerExordium.currentPuzzlePack.puzzles.size();
+            int bgPieceCount = (puzzleCount + 2) / 3;
+            int yOffset = 0;
+            float bottom = -this.getMapMidDist()
+                    + DungeonMapScreen.offsetY
+                    + this.getMapOffsetY() + 1.0F;
+            while (bgPieceCount > 0) {
+                sb.draw(
+                        cur.texture,
+                        0.0F,
+                        yOffset + bottom,
+                        Settings.WIDTH,
+                        cur.texture.getHeight() * Settings.scale);
+                yOffset += (cur.texture.getHeight() / 2) * Settings.scale;
+                yOffset += 140 * Settings.scale;
+                cur = cur.next.get(0);
+                bgPieceCount--;
+            }
         }
-    }
-
-    private void renderMapBlender(SpriteBatch sb) {
-        sb.draw(blend, 0.0F, DungeonMapScreen.offsetY + getMapOffsetY() + 550.0F * Settings.scale, (float) Settings.WIDTH, BLEND_H);
-        sb.draw(blend, 0.0F, DungeonMapScreen.offsetY + getMapOffsetY() + 650.0F * Settings.scale, (float) Settings.WIDTH, BLEND_H);
-        sb.draw(blend, 0.0F, DungeonMapScreen.offsetY + getMapOffsetY() + 750.0F * Settings.scale, (float) Settings.WIDTH, BLEND_H);
     }
 
     private float getMapMidDist() {
