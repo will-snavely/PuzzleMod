@@ -15,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 import org.barnhorse.puzzlemod.assets.StaticAssets;
 import org.barnhorse.puzzlemod.assets.StringsHelper;
 import org.barnhorse.puzzlemod.characters.ThePuzzler;
-import org.barnhorse.puzzlemod.dungeons.ExordiumFactory;
 import org.barnhorse.puzzlemod.packs.DefaultPuzzleApplicator;
 import org.barnhorse.puzzlemod.packs.PuzzleApplicator;
 import org.barnhorse.puzzlemod.packs.model.PuzzlePack;
@@ -43,6 +42,8 @@ public class PuzzleMod implements
             .get("mods", "etc", "barnhorse", "puzzlemod")
             .toAbsolutePath();
     private static final Path puzzlesPath = modWorkingPath.resolve("puzzles");
+    public static PuzzlePack currentPuzzlePack;
+    public static int lastPuzzleRow;
 
     private static PuzzleApplicator puzzleApplicator;
     private static String currentPuzzleFile;
@@ -110,16 +111,17 @@ public class PuzzleMod implements
         if(isBuiltin(currentPuzzleFile)) {
             String baseName = getBaseResource(currentPuzzleFile);
             String resource = "/puzzleModResources/packs/" + baseName;
-            InputStream in = ExordiumFactory.class.getResourceAsStream(resource);
-            return gson.fromJson(new InputStreamReader(in), PuzzlePack.class);
+            InputStream in = PuzzleMod.class.getResourceAsStream(resource);
+            currentPuzzlePack = gson.fromJson(new InputStreamReader(in), PuzzlePack.class);
         } else {
             Path path = puzzlesPath.resolve(currentPuzzleFile);
             try {
-                return gson.fromJson(new FileReader(path.toFile()), PuzzlePack.class);
+                currentPuzzlePack = gson.fromJson(new FileReader(path.toFile()), PuzzlePack.class);
             } catch(IOException ioe) {
                 throw new RuntimeException(ioe);
             }
         }
+        return currentPuzzlePack;
     }
 
     public static void initialize() {
