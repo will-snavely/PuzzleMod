@@ -13,12 +13,10 @@ import org.barnhorse.puzzlemod.packs.model.Puzzle;
 
 public class PuzzleMonsterRoom extends MonsterRoom {
     private Puzzle puzzle;
-    private PuzzleRoomAdapter adapter;
 
     public PuzzleMonsterRoom(Puzzle puzzle) {
         this.phase = RoomPhase.COMBAT;
         this.puzzle = puzzle;
-        this.adapter = new PuzzleRoomAdapter(this, puzzle);
 
         this.mapSymbol = "P";
         int roll = MathUtils.random(4);

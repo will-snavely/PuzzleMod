@@ -5,7 +5,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.VictoryRoom;
 import org.barnhorse.puzzlemod.events.PuzzlerVictoryEvent;
 
-
 public class PuzzlerVictoryRoom extends VictoryRoom {
     public PuzzlerVictoryRoom() {
         super(EventType.NONE);
