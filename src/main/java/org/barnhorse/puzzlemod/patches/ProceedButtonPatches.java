@@ -20,8 +20,7 @@ public class ProceedButtonPatches {
                         String puzzlerCheck =
                                 "org.barnhorse.puzzlemod.characters.ThePuzzler.isPuzzlerChosen()";
                         String postBossHandler =
-                                "org.barnhorse.puzzlemod.dungeons.PuzzlerExordium.postBossHandler(this)";
-
+                                "org.barnhorse.puzzlemod.dungeons.ExordiumHooks.postBossHandler(this)";
                         String code = String.format(
                                 "(%s) ? %s : this.goToTreasureRoom();",
                                 puzzlerCheck,

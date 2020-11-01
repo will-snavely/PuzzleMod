@@ -1,7 +1,6 @@
 package org.barnhorse.puzzlemod;
 
 import basemod.abstracts.CustomSavable;
-import org.barnhorse.puzzlemod.PuzzleMod;
 
 public class PuzzleFileSave implements CustomSavable<String> {
     @Override

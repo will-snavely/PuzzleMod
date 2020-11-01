@@ -6,16 +6,15 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
-import org.barnhorse.puzzlemod.packs.Puzzle;
+import org.barnhorse.puzzlemod.PuzzleMod;
+import org.barnhorse.puzzlemod.packs.model.Puzzle;
 
 public class PuzzleBossRoom extends MonsterRoomBoss {
     private Puzzle puzzle;
-    private PuzzleRoomAdapter adapter;
 
     public PuzzleBossRoom(Puzzle puzzle) {
         this.phase = RoomPhase.COMBAT;
         this.puzzle = puzzle;
-        this.adapter = new PuzzleRoomAdapter(this, puzzle);
         this.mapSymbol = "B";
     }
 
@@ -54,7 +53,11 @@ public class PuzzleBossRoom extends MonsterRoomBoss {
     public void onPlayerEntry() {
         CardCrawlGame.metricData.path_taken.add("BOSS");
         CardCrawlGame.music.silenceBGM();
-        this.adapter.onPlayerEntry(AbstractDungeon.player);
+        PuzzleMod.getPuzzleApplicator().onPlayerEnterRoom(
+                this.puzzle,
+                this,
+                AbstractDungeon.player
+        );
         AbstractRoom.waitTimer = COMBAT_WAIT_TIME;
     }
 }

@@ -1,11 +1,11 @@
 package org.barnhorse.puzzlemod;
 
+import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
@@ -15,35 +15,47 @@ import org.apache.logging.log4j.Logger;
 import org.barnhorse.puzzlemod.assets.StaticAssets;
 import org.barnhorse.puzzlemod.assets.StringsHelper;
 import org.barnhorse.puzzlemod.characters.ThePuzzler;
-import org.barnhorse.puzzlemod.dungeons.ExordiumFactory;
-import org.barnhorse.puzzlemod.packs.PuzzlePack;
+import org.barnhorse.puzzlemod.packs.DefaultPuzzleApplicator;
+import org.barnhorse.puzzlemod.packs.PuzzleApplicator;
+import org.barnhorse.puzzlemod.packs.model.PuzzlePack;
 import org.barnhorse.puzzlemod.relics.BagOfPieces;
 import theDefault.relics.CursedCornerPiece;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.barnhorse.puzzlemod.characters.ThePuzzler.Enums.COLOR_GRAY;
 import static org.barnhorse.puzzlemod.characters.ThePuzzler.Enums.THE_PUZZLER;
 
 @SpireInitializer
 public class PuzzleMod implements
-        EditCardsSubscriber,
         EditRelicsSubscriber,
         EditStringsSubscriber,
-        EditKeywordsSubscriber,
+        EditCardsSubscriber,
         EditCharactersSubscriber,
         PostInitializeSubscriber {
     public static final Logger logger = LogManager.getLogger(PuzzleMod.class.getName());
-
     public static final Color DEFAULT_GRAY = CardHelper.getColor(64.0f, 70.0f, 70.0f);
 
-    public static final String PUZZLE_FILE_SETTING = "puzzleFile";
+    private static final Path modWorkingPath = Paths
+            .get("mods", "etc", "barnhorse", "puzzlemod")
+            .toAbsolutePath();
+    private static final Path puzzlesPath = modWorkingPath.resolve("puzzles");
+    public static PuzzlePack currentPuzzlePack;
+    public static int lastPuzzleRow;
 
+    private static PuzzleApplicator puzzleApplicator;
     private static String currentPuzzleFile;
+    private static String builtinPuzzlePrefix = "__builtin__";
 
-    public static Properties modSettings = new Properties();
+    private static void createPuzzleDirectory() {
+        File file = puzzlesPath.toFile();
+        file.mkdirs();
+        if (!file.exists()) {
+            throw new RuntimeException("Failed to create directory at: " + puzzlesPath);
+        }
+    }
 
     public PuzzleMod() {
         logger.info("Creating the color " + COLOR_GRAY.toString());
@@ -68,9 +80,7 @@ public class PuzzleMod implements
                 StaticAssets.CARD_ENERGY_ORB);
 
         logger.info("Done creating the color");
-        setCurrentPuzzleFile("starter.json");
-        String saveKey = ModId.create("puzzleFile");
-        BaseMod.addSaveField(saveKey, new PuzzleFileSave());
+
     }
 
     public static String getCurrentPuzzleFile() {
@@ -81,15 +91,47 @@ public class PuzzleMod implements
         currentPuzzleFile = puzzleFile;
     }
 
+    private static boolean isBuiltin(String puzzle) {
+        return puzzle != null && puzzle.startsWith(builtinPuzzlePrefix);
+    }
+
+    private static String getBaseResource(String puzzle) {
+        if(puzzle == null) {
+            return null;
+        }
+        return puzzle.replace(builtinPuzzlePrefix, "");
+    }
+
+    public static String builtinPuzzle(String name) {
+        return String.format("%s%s", builtinPuzzlePrefix, name);
+    }
+
     public static PuzzlePack loadCurrentPack() {
         Gson gson = new Gson();
-        String puzzleFile = "/puzzleModResources/packs/" + currentPuzzleFile;
-        InputStream in = ExordiumFactory.class.getResourceAsStream(puzzleFile);
-        return gson.fromJson(new InputStreamReader(in), PuzzlePack.class);
+        if(isBuiltin(currentPuzzleFile)) {
+            String baseName = getBaseResource(currentPuzzleFile);
+            String resource = "/puzzleModResources/packs/" + baseName;
+            InputStream in = PuzzleMod.class.getResourceAsStream(resource);
+            currentPuzzlePack = gson.fromJson(new InputStreamReader(in), PuzzlePack.class);
+        } else {
+            Path path = puzzlesPath.resolve(currentPuzzleFile);
+            try {
+                currentPuzzlePack = gson.fromJson(new FileReader(path.toFile()), PuzzlePack.class);
+            } catch(IOException ioe) {
+                throw new RuntimeException(ioe);
+            }
+        }
+        return currentPuzzlePack;
     }
 
     public static void initialize() {
+        createPuzzleDirectory();
+        setCurrentPuzzleFile(builtinPuzzle("demo.json"));
+        String saveKey = ModId.create("puzzleFile");
+        BaseMod.addSaveField(saveKey, new PuzzleFileSave());
+
         PuzzleMod mod = new PuzzleMod();
+        puzzleApplicator = new DefaultPuzzleApplicator();
         BaseMod.subscribe(mod);
     }
 
@@ -108,14 +150,10 @@ public class PuzzleMod implements
 
     @Override
     public void receiveEditCards() {
-        /*
-        logger.info("Adding cards");
         new AutoAdd("PuzzleMod")
                 .packageFilter("org.barnhorse.puzzlemod.cards")
                 .setDefaultSeen(true)
                 .cards();
-        logger.info("Done adding cards!");
-        */
     }
 
     @Override
@@ -130,12 +168,12 @@ public class PuzzleMod implements
     }
 
     @Override
-    public void receiveEditKeywords() {
-    }
-
-    @Override
     public void receiveEditRelics() {
         BaseMod.addRelicToCustomPool(new CursedCornerPiece(), COLOR_GRAY);
         BaseMod.addRelicToCustomPool(new BagOfPieces(), COLOR_GRAY);
+    }
+
+    public static PuzzleApplicator getPuzzleApplicator() {
+        return puzzleApplicator;
     }
 }

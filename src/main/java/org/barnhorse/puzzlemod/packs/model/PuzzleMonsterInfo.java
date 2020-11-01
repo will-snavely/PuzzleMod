@@ -1,4 +1,4 @@
-package org.barnhorse.puzzlemod.packs;
+package org.barnhorse.puzzlemod.packs.model;
 
 public class PuzzleMonsterInfo {
     public String name;

@@ -7,17 +7,16 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
+import org.barnhorse.puzzlemod.PuzzleMod;
 import org.barnhorse.puzzlemod.assets.StaticAssets;
-import org.barnhorse.puzzlemod.packs.Puzzle;
+import org.barnhorse.puzzlemod.packs.model.Puzzle;
 
 public class PuzzleMonsterRoom extends MonsterRoom {
     private Puzzle puzzle;
-    private PuzzleRoomAdapter adapter;
 
     public PuzzleMonsterRoom(Puzzle puzzle) {
         this.phase = RoomPhase.COMBAT;
         this.puzzle = puzzle;
-        this.adapter = new PuzzleRoomAdapter(this, puzzle);
 
         this.mapSymbol = "P";
         int roll = MathUtils.random(4);
@@ -59,7 +58,11 @@ public class PuzzleMonsterRoom extends MonsterRoom {
 
     public void onPlayerEntry() {
         this.playBGM(null);
-        this.adapter.onPlayerEntry(AbstractDungeon.player);
+        PuzzleMod.getPuzzleApplicator().onPlayerEnterRoom(
+                this.puzzle,
+                this,
+                AbstractDungeon.player
+        );
         AbstractDungeon.lastCombatMetricKey = "Custom Monster";
         AbstractRoom.waitTimer = COMBAT_WAIT_TIME;
     }

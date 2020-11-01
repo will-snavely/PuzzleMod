@@ -5,10 +5,8 @@ import basemod.animations.SpineAnimation;
 import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Strike_Red;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -27,13 +25,11 @@ import org.apache.logging.log4j.Logger;
 import org.barnhorse.puzzlemod.ModId;
 import org.barnhorse.puzzlemod.PuzzleMod;
 import org.barnhorse.puzzlemod.assets.StaticAssets;
-import org.barnhorse.puzzlemod.packs.Puzzle;
-import org.barnhorse.puzzlemod.packs.PuzzleCard;
+import org.barnhorse.puzzlemod.packs.model.Puzzle;
 import org.barnhorse.puzzlemod.rooms.PuzzleBossRoom;
 import org.barnhorse.puzzlemod.rooms.PuzzleMonsterRoom;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ThePuzzler extends CustomPlayer {
     public static final Logger logger = LogManager.getLogger(ThePuzzler.class.getName());
@@ -41,17 +37,17 @@ public class ThePuzzler extends CustomPlayer {
     public static class Enums {
         @SpireEnum
         public static PlayerClass THE_PUZZLER;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR")
+        @SpireEnum(name = "PUZZLER_GRAY_COLOR")
         public static AbstractCard.CardColor COLOR_GRAY;
-        @SpireEnum(name = "DEFAULT_GRAY_COLOR")
+        @SpireEnum(name = "PUZZLER_GRAY_COLOR")
 
         @SuppressWarnings("unused")
         public static CardLibrary.LibraryType LIBRARY_COLOR;
     }
 
     public static final int ENERGY_PER_TURN = 3;
-    public static final int STARTING_HP = 500;
-    public static final int MAX_HP = 500;
+    public static final int STARTING_HP = 80;
+    public static final int MAX_HP = 80;
     public static final int STARTING_GOLD = 0;
     public static final int CARD_DRAW = 5;
     public static final int ORB_SLOTS = 0;
@@ -84,18 +80,18 @@ public class ThePuzzler extends CustomPlayer {
                 StaticAssets.FROG_SHOULDER_1, // campfire pose
                 StaticAssets.FROG_SHOULDER_2, // another campfire pose
                 StaticAssets.COFFIN, // dead corpse
-                getLoadout(), 20.0F, -10.0F, 220.0F, 290.0F,
+                getLoadout(),
+                20.0F, -10.0F, 220.0F, 290.0F,
                 new EnergyManager(ENERGY_PER_TURN)); // energy manager
-        dialogX = (drawX + 0.0F * Settings.scale); // set location for text bubbles
-        dialogY = (drawY + 220.0F * Settings.scale); // you can just copy these values
+        dialogX = (drawX + 0.0F * Settings.scale);
+        dialogY = (drawY + 220.0F * Settings.scale);
         this.turnIntoChamp();
     }
 
     public void turnIntoChamp() {
         this.flipHorizontal = true;
         this.animation = armor;
-        AnimationState.TrackEntry e = this.state.setAnimation(
-                0, "Idle", true);
+        this.state.setAnimation(0, "Idle", true);
     }
 
     public void turnIntoFrog() {
@@ -121,6 +117,7 @@ public class ThePuzzler extends CustomPlayer {
 
     @Override
     public ArrayList<String> getStartingDeck() {
+        // This is just to make the game happy; the starting deck is irrelevant
         ArrayList<String> result = new ArrayList<>();
         result.add("Strike_R");
         result.add("Strike_R");
@@ -187,28 +184,21 @@ public class ThePuzzler extends CustomPlayer {
         return NAMES[1];
     }
 
-    // Should return a new instance of your character, sending name as its name parameter.
     @Override
     public AbstractPlayer newInstance() {
         return new ThePuzzler(name, chosenClass);
     }
 
-    // Should return a Color object to be used to color the miniature card images in run history.
     @Override
     public Color getCardRenderColor() {
         return PuzzleMod.DEFAULT_GRAY;
     }
 
-    // Should return a Color object to be used as screen tint effect when your
-    // character attacks the heart.
     @Override
     public Color getSlashAttackColor() {
         return PuzzleMod.DEFAULT_GRAY;
     }
 
-    // Should return an AttackEffect array of any size greater than 0. These effects
-    // will be played in sequence as your character's finishing combo on the heart.
-    // Attack effects are the same as used in DamageAction and the like.
     @Override
     public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect() {
         return new AbstractGameAction.AttackEffect[]{
@@ -218,64 +208,16 @@ public class ThePuzzler extends CustomPlayer {
         };
     }
 
-    // Should return a string containing what text is shown when your character is
-    // about to attack the heart. For example, the defect is "NL You charge your
-    // core to its maximum..."
     @Override
     public String getSpireHeartText() {
-        return TEXT[1];
+        // This should be irrelevant
+        return "";
     }
 
-    // The vampire events refer to the base game characters as "brother", "sister",
-    // and "broken one" respectively.This method should return a String containing
-    // the full text that will be displayed as the first screen of the vampires event.
     @Override
     public String getVampireText() {
-        return TEXT[2];
-    }
-
-    private List<AbstractCard> createPuzzleCards(List<PuzzleCard> puzzleCards) {
-        List<AbstractCard> result = new ArrayList<>();
-
-        for (PuzzleCard puzzleCard : puzzleCards) {
-            AbstractCard card = CardLibrary.getCard(puzzleCard.key).makeCopy();
-            if (puzzleCard.upgradeCount > 0) {
-                for (int ii = 0; ii < puzzleCard.upgradeCount; ii++) {
-                    card.upgrade();
-                }
-            }
-            result.add(card);
-        }
-        return result;
-    }
-
-    private void initHand(List<PuzzleCard> puzzleCards) {
-        List<AbstractCard> startingHand = this.createPuzzleCards(puzzleCards);
-        for (AbstractCard card : startingHand) {
-            AbstractDungeon.actionManager.
-                    addToBottom(new MakeTempCardInHandAction(card, true));
-        }
-    }
-
-    private void initDrawPile(List<PuzzleCard> puzzleCards) {
-        List<AbstractCard> draw = this.createPuzzleCards(puzzleCards);
-        for (AbstractCard card : draw) {
-            this.drawPile.addToBottom(card);
-        }
-    }
-
-    private void initDiscardPile(List<PuzzleCard> puzzleCards) {
-        List<AbstractCard> discard = this.createPuzzleCards(puzzleCards);
-        for (AbstractCard card : discard) {
-            this.discardPile.addToBottom(card);
-        }
-    }
-
-    private void initExhaustPile(List<PuzzleCard> puzzleCards) {
-        List<AbstractCard> exhaust = this.createPuzzleCards(puzzleCards);
-        for (AbstractCard card : exhaust) {
-            this.exhaustPile.addToBottom(card);
-        }
+        // Should be irrelevant
+        return "";
     }
 
     @Override
@@ -290,29 +232,18 @@ public class ThePuzzler extends CustomPlayer {
             puzzle = room.getPuzzle();
         }
 
+
         if (puzzle == null) {
             super.preBattlePrep();
         } else {
             super.preBattlePrep();
-            if (puzzle.startingHand != null) {
-                this.initHand(puzzle.startingHand);
-            }
-
-            if (puzzle.startingDrawPile != null) {
-                this.initDrawPile(puzzle.startingDrawPile);
-            }
-
-            if (puzzle.startingDiscardPile != null) {
-                this.initDiscardPile(puzzle.startingDiscardPile);
-            }
-
-            if (puzzle.startingExhaustPile != null) {
-                this.initExhaustPile(puzzle.startingExhaustPile);
-            }
+            PuzzleMod.getPuzzleApplicator().preBattlePrep(
+                    puzzle, currentRoom, this);
         }
     }
 
     public static boolean isPuzzlerChosen() {
-        return AbstractDungeon.player.chosenClass == Enums.THE_PUZZLER;
+        return AbstractDungeon.player != null &&
+                AbstractDungeon.player.chosenClass == Enums.THE_PUZZLER;
     }
 }
