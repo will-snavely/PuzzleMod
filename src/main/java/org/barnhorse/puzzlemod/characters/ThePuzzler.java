@@ -243,6 +243,7 @@ public class ThePuzzler extends CustomPlayer {
     }
 
     public static boolean isPuzzlerChosen() {
-        return AbstractDungeon.player.chosenClass == Enums.THE_PUZZLER;
+        return AbstractDungeon.player != null &&
+                AbstractDungeon.player.chosenClass == Enums.THE_PUZZLER;
     }
 }
