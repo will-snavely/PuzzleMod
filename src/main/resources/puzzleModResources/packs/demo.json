@@ -11,7 +11,7 @@
       ],
       "orbCount": 3,
       "maxHp": 20,
-      "currentHp": 20,
+      "curHp": 20,
       "monsters": [
         {
           "name": "Cultist",
@@ -45,7 +45,7 @@
       ],
       "orbCount": 0,
       "maxHp": 20,
-      "currentHp": 20,
+      "curHp": 20,
       "monsters": [
         {
           "name": "Cultist",
@@ -78,7 +78,7 @@
       ],
       "orbCount": 0,
       "maxHp": 20,
-      "currentHp": 20,
+      "curHp": 20,
       "potions": [
         {
           "key": "Fire Potion"
@@ -123,7 +123,7 @@
       ],
       "orbCount": 0,
       "maxHp": 20,
-      "currentHp": 20,
+      "curHp": 20,
       "relics": [
         {
           "key": "Akabeko"
@@ -176,7 +176,7 @@
       ],
       "orbCount": 0,
       "maxHp": 20,
-      "currentHp": 3,
+      "curHp": 3,
       "potions": [],
       "monsters": [
         {
@@ -234,7 +234,7 @@
       ],
       "orbCount": 0,
       "maxHp": 20,
-      "currentHp": 20,
+      "curHp": 20,
       "monsters": [
         {
           "name": "Cultist",
@@ -283,7 +283,7 @@
       ],
       "orbCount": 0,
       "maxHp": 17,
-      "currentHp": 17,
+      "curHp": 17,
       "monsters": [
         {
           "name": "Cultist",
@@ -330,7 +330,7 @@
       ],
       "orbCount": 0,
       "maxHp": 14,
-      "currentHp": 14,
+      "curHp": 14,
       "monsters": [
         {
           "name": "Cultist",
@@ -374,7 +374,7 @@
       ],
       "orbCount": 0,
       "maxHp": 20,
-      "currentHp": 20,
+      "curHp": 20,
       "monsters": [
         {
           "name": "Cultist",
@@ -452,7 +452,7 @@
     ],
     "orbCount": 0,
     "maxHp": 20,
-    "currentHp": 20,
+    "curHp": 20,
     "monsters": [
       {
         "name": "Cultist",
