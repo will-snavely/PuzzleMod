@@ -177,6 +177,7 @@ public class ExordiumHooks {
         AbstractDungeon.bossList.add(puzzlerBossKey);
     }
 
+    @SuppressWarnings("unused")
     public static void postBossHandler(ProceedButton button) {
         MapRoomNode node = new MapRoomNode(-1, 15);
         node.room = new PuzzlerVictoryRoom();
