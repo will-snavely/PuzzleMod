@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Puzzle {
     public int maxHp;
-    public int currentHp;
+    public int curHp;
     public int masterHandSize;
     public int maxEnergy;
 
@@ -19,6 +19,4 @@ public class Puzzle {
 
     public int orbSlots;
     public List<PuzzleOrb> orbs;
-
-    public String startingStance;
 }

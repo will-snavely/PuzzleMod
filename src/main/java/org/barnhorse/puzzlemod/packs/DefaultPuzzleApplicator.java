@@ -26,8 +26,8 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
     public void onPlayerEnterRoom(Puzzle puzzle, AbstractRoom room, AbstractPlayer player) {
         player.maxHealth = puzzle.maxHp;
 
-        if(puzzle.currentHp > 0) {
-            player.currentHealth = puzzle.currentHp;
+        if(puzzle.curHp > 0) {
+            player.currentHealth = puzzle.curHp;
         }
         player.masterDeck.clear();
         player.masterHandSize = puzzle.masterHandSize;
