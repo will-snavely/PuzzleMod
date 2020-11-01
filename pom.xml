@@ -6,7 +6,7 @@
 
     <groupId>org.barnhorse.puzzlemod</groupId>
     <artifactId>PuzzleMod</artifactId>
-    <version>0.1</version>
+    <version>0.0.2</version>
 
     <properties>
         <SlayTheSpire.version>06-22-2020</SlayTheSpire.version>
