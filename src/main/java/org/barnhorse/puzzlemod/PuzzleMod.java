@@ -294,11 +294,11 @@ public class PuzzleMod implements
                 settingsPanel,
                 (b) -> {
                     try {
-                        String selected = selector.getSelected();
+                        PuzzleList.ListItem selected = selector.getSelected();
                         SpireConfig config = getSpireConfig();
-                        config.setString(selectedPuzzleFileSetting, selected);
+                        config.setString(selectedPuzzleFileSetting, selected.getValue());
                         config.save();
-                        bottomLabel.text = "Currently selected puzzle: " + selected;
+                        bottomLabel.text = "Currently selected puzzle: " + selected.getDisplay();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

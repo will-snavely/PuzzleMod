@@ -38,6 +38,26 @@ public class PuzzleList implements IUIElement {
         listWidth = 800;
     }
 
+    public static class ListItem {
+        public String value;
+
+        public ListItem(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return this.value;
+        }
+
+        public String getDisplay() {
+            if (PuzzleMod.isBuiltin(this.value)) {
+                return "(Builtin) " + PuzzleMod.getBaseResource(this.value);
+            } else {
+                return "(Custom) " + this.value;
+            }
+        }
+    }
+
     public ModPanel parent;
 
     public void increaseSelectedIndex() {
@@ -69,28 +89,8 @@ public class PuzzleList implements IUIElement {
         }
     }
 
-    public String getSelected() {
-        return this.items.get(this.selectedRow).getValue();
-    }
-
-    private static class ListItem {
-        public String value;
-
-        public ListItem(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return this.value;
-        }
-
-        public String getDisplay() {
-            if (PuzzleMod.isBuiltin(this.value)) {
-                return "(Builtin) " + PuzzleMod.getBaseResource(this.value);
-            } else {
-                return "(Custom) " + this.value;
-            }
-        }
+    public ListItem getSelected() {
+        return this.items.get(this.selectedRow);
     }
 
     public PuzzleList(
