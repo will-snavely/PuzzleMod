@@ -214,8 +214,6 @@ public class PuzzleMod implements
 
     @Override
     public void receivePostInitialize() {
-        logger.info("Loading badge image and mod options");
-
         Texture badgeTexture = ImageMaster.loadImage(StaticAssets.MOD_BADGE);
         ModPanel settingsPanel = new ModPanel();
 
@@ -321,9 +319,9 @@ public class PuzzleMod implements
 
         BaseMod.registerModBadge(
                 badgeTexture,
-                "MODNAME",
-                "AUTHOR",
-                "DESCRIPTION",
+                "PuzzleMod",
+                "barnhorse",
+                "Puzzle Mode for Spire",
                 settingsPanel);
     }
 
