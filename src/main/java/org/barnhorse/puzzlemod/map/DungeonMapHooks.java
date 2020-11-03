@@ -28,7 +28,6 @@ import java.util.List;
 public class DungeonMapHooks {
     private static PieceNode pieceGraph;
     private static float BOSS_W = 512.0F * Settings.scale;
-    private static float BOSS_OFFSET_Y = 1416.0F * Settings.scale;
 
     private static class PieceNode {
         public Texture texture;
@@ -99,7 +98,7 @@ public class DungeonMapHooks {
 
         map.bossHb.move(
                 (float) Settings.WIDTH / 2.0F,
-                DungeonMapScreen.offsetY + getMapOffsetY(map) + BOSS_OFFSET_Y + BOSS_W / 2.0F);
+                DungeonMapScreen.offsetY + getMapOffsetY(map) + getBossOffset() + BOSS_W / 2.0F);
         map.bossHb.update();
         updateReticle(map);
 
@@ -179,6 +178,34 @@ public class DungeonMapHooks {
             yOffset += 138 * Settings.scale;
             cur = cur.north.get(0);
             bgPieceCount--;
+        }
+    }
+
+    private static float getBossOffset() {
+        int puzzleCount = PuzzleMod.currentPuzzlePack.puzzles.size();
+        return puzzleCount * 161.0f * Settings.scale;
+    }
+
+    public static void renderBossIcon(DungeonMap map, SpriteBatch sb) {
+        if (DungeonMap.boss != null) {
+            sb.setColor(new Color(1.0F, 1.0F, 1.0F, getBossNodeColor(map).a));
+
+            sb.draw(DungeonMap.bossOutline,
+                    (float) Settings.WIDTH / 2.0F - BOSS_W / 2.0F,
+                    DungeonMapScreen.offsetY + getMapOffsetY(map) + getBossOffset(),
+                    BOSS_W, BOSS_W);
+            sb.setColor(getBossNodeColor(map));
+            sb.draw(DungeonMap.boss,
+                    (float) Settings.WIDTH / 2.0F - BOSS_W / 2.0F,
+                    DungeonMapScreen.offsetY + getMapOffsetY(map) + getBossOffset(),
+                    BOSS_W, BOSS_W);
+        }
+
+        if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) {
+            map.bossHb.render(sb);
+            if (Settings.isControllerMode && AbstractDungeon.dungeonMapScreen.map.bossHb.hovered) {
+                map.renderReticle(sb, AbstractDungeon.dungeonMapScreen.map.bossHb);
+            }
         }
     }
 

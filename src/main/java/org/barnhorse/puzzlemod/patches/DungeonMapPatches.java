@@ -51,4 +51,18 @@ public class DungeonMapPatches {
             return SpireReturn.Continue();
         }
     }
+
+    @SpirePatch(
+            clz = DungeonMap.class,
+            method = "renderBossIcon"
+    )
+    public static class PatchRenderBossIcon {
+        public static SpireReturn Prefix(DungeonMap map, SpriteBatch sb) {
+            if (AbstractDungeon.player != null && ThePuzzler.isPuzzlerChosen()) {
+                DungeonMapHooks.renderBossIcon(map, sb);
+                return SpireReturn.Return(null);
+            }
+            return SpireReturn.Continue();
+        }
+    }
 }

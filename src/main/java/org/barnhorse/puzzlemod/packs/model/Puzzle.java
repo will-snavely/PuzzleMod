@@ -19,4 +19,5 @@ public class Puzzle {
 
     public int orbSlots;
     public List<PuzzleOrb> orbs;
+    public String startingStance;
 }

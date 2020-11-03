@@ -58,4 +58,20 @@ public class StaticAssets {
             ResourceHelper.getResourcePath("images", "relics", "bag_pieces.png");
     public static final String BAG_PIECES_OUTLINE =
             ResourceHelper.getResourcePath("images", "relics", "bag_pieces_outline.png");
+
+    public static final String MOD_BADGE =
+            ResourceHelper.getResourcePath("images", "ui", "badge.png");
+    public static final String UP_ARROW =
+            ResourceHelper.getResourcePath("images", "ui", "up_arrow.png");
+    public static final String DOWN_ARROW =
+            ResourceHelper.getResourcePath("images", "ui", "down_arrow.png");
+    public static final String REFRESH =
+            ResourceHelper.getResourcePath("images", "ui", "refresh.png");
+    public static final String SUBMIT =
+            ResourceHelper.getResourcePath("images", "ui", "submit.png");
+
+    public static final String LIST_BACKGROUND =
+            ResourceHelper.getResourcePath("images", "ui", "list_bg.png");
+    public static final String ROW_HIGHLIGHT =
+            ResourceHelper.getResourcePath("images", "ui", "row_highlight.png");
 }

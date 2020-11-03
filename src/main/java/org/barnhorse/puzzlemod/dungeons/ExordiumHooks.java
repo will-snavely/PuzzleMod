@@ -33,7 +33,7 @@ public class ExordiumHooks {
         if (AbstractDungeon.scene != null) {
             AbstractDungeon.scene.dispose();
         }
-        PuzzlePack pack = PuzzleMod.loadCurrentPack();
+        PuzzlePack pack = PuzzleMod.loadPackFromSettings();
         AbstractDungeon.scene = new TheBottomScene();
         AbstractDungeon.scene.randomizeScene();
         AbstractDungeon.fadeColor = Color.valueOf("1e0f0aff");
@@ -54,17 +54,15 @@ public class ExordiumHooks {
         if (AbstractDungeon.scene != null) {
             AbstractDungeon.scene.dispose();
         }
-        PuzzlePack pack = PuzzleMod.loadCurrentPack();
-
+        PuzzlePack pack = PuzzleMod.loadPackFromSave();
         AbstractDungeon.scene = new TheBottomScene();
         AbstractDungeon.fadeColor = Color.valueOf("1e0f0aff");
         AbstractDungeon.sourceFadeColor = Color.valueOf("1e0f0aff");
-        AbstractDungeon.miscRng = new Random(Settings.seed + (long)saveFile.floor_num);
+        AbstractDungeon.miscRng = new Random(Settings.seed + (long) saveFile.floor_num);
         AbstractDungeon.mapRng = new Random(Settings.seed + (long) saveFile.act_num);
         CardCrawlGame.music.changeBGM(AbstractDungeon.id);
         AbstractDungeon.map = generateSpecialMap(pack);
         AbstractDungeon.firstRoomChosen = true;
-
 
         populatePathTaken(exordium, saveFile, pack);
         if (isLoadingIntoNeow(saveFile)) {
@@ -124,8 +122,8 @@ public class ExordiumHooks {
             MapRoomNode cur = AbstractDungeon.map.get(yPos).get(xPos);
 
             if (yPos == PuzzleMod.lastPuzzleRow) {
-                for(MapEdge e : cur.getEdges()) {
-                    if(e != null) {
+                for (MapEdge e : cur.getEdges()) {
+                    if (e != null) {
                         e.markAsTaken();
                     }
                 }

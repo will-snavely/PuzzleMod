@@ -1,6 +1,7 @@
 package org.barnhorse.puzzlemod.packs;
 
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
@@ -10,6 +11,10 @@ import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.orbs.Dark;
+import com.megacrit.cardcrawl.orbs.Frost;
+import com.megacrit.cardcrawl.orbs.Lightning;
+import com.megacrit.cardcrawl.orbs.Plasma;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -26,11 +31,17 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
     public void onPlayerEnterRoom(Puzzle puzzle, AbstractRoom room, AbstractPlayer player) {
         player.maxHealth = puzzle.maxHp;
 
-        if(puzzle.curHp > 0) {
+        if (puzzle.curHp > 0) {
             player.currentHealth = puzzle.curHp;
         }
         player.masterDeck.clear();
         player.masterHandSize = puzzle.masterHandSize;
+
+        if (puzzle.maxEnergy > 0) {
+            player.energy.energyMaster = puzzle.maxEnergy;
+        } else {
+            player.energy.energyMaster = 3;
+        }
 
         if (player.maxOrbs > 0) {
             player.masterMaxOrbs = 0;
@@ -41,10 +52,10 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
 
         List<AbstractRelic> relics = new ArrayList<>(player.relics);
         for (AbstractRelic relic : relics) {
-            if(relic.relicId.equals(CursedCornerPiece.ID)) {
+            if (relic.relicId.equals(CursedCornerPiece.ID)) {
                 continue;
             }
-            if(relic.relicId.equals(BagOfPieces.ID)) {
+            if (relic.relicId.equals(BagOfPieces.ID)) {
                 continue;
             }
             player.loseRelic(relic.relicId);
@@ -57,7 +68,7 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
             }
         }
 
-        if(puzzle.relics != null) {
+        if (puzzle.relics != null) {
             for (PuzzleRelic puzzleRelic : puzzle.relics) {
                 AbstractRelic relic = RelicLibrary.getRelic(puzzleRelic.key).makeCopy();
                 AbstractDungeon.getCurrRoom().
@@ -70,7 +81,7 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
         }
         player.reorganizeRelics();
 
-        if(puzzle.potions != null) {
+        if (puzzle.potions != null) {
             for (PuzzlePotion puzzlePotion : puzzle.potions) {
                 AbstractPotion potion = PotionHelper.getPotion(puzzlePotion.key);
                 player.obtainPotion(potion);
@@ -103,6 +114,33 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
 
         if (puzzle.startingExhaustPile != null) {
             this.initExhaustPile(player, puzzle.startingExhaustPile);
+        }
+
+        if (puzzle.startingStance != null && puzzle.startingStance != "") {
+            AbstractDungeon.actionManager.addToBottom(
+                    new ChangeStanceAction(puzzle.startingStance));
+        }
+
+        if (puzzle.orbs != null) {
+            for (PuzzleOrb orb : puzzle.orbs) {
+                switch (orb.key) {
+                    case "Dark":
+                        player.channelOrb(new Dark());
+                        break;
+                    case "Plasma":
+                        player.channelOrb(new Plasma());
+                        break;
+                    case "Lightning":
+                        player.channelOrb(new Lightning());
+                        break;
+                    case "Frost":
+                        player.channelOrb(new Frost());
+                        break;
+                    default:
+                        throw new RuntimeException("Unknown orb in puzzle: " + orb.key);
+                }
+
+            }
         }
     }
 
