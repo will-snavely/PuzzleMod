@@ -1,10 +1,9 @@
-package theDefault.relics;
+package org.barnhorse.puzzlemod.relics;
 
 import basemod.abstracts.CustomRelic;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import org.barnhorse.puzzlemod.ModId;
 import org.barnhorse.puzzlemod.assets.StaticAssets;
-
 
 public class CursedCornerPiece extends CustomRelic {
     public static final String ID = ModId.create(CursedCornerPiece.class.getSimpleName());

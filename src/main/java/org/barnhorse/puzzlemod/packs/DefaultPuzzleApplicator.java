@@ -21,7 +21,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import org.barnhorse.puzzlemod.monsters.PuzzleMonster;
 import org.barnhorse.puzzlemod.packs.model.*;
 import org.barnhorse.puzzlemod.relics.BagOfPieces;
-import theDefault.relics.CursedCornerPiece;
+import org.barnhorse.puzzlemod.relics.CursedCornerPiece;
 
 import java.util.ArrayList;
 import java.util.List;

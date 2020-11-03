@@ -19,13 +19,12 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.InfiniteSpeechBubble;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
-import com.megacrit.cardcrawl.vfx.scene.LevelTransitionTextOverlayEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.barnhorse.puzzlemod.ModId;
 import org.barnhorse.puzzlemod.characters.ThePuzzler;
 import org.barnhorse.puzzlemod.relics.BagOfPieces;
-import theDefault.relics.CursedCornerPiece;
+import org.barnhorse.puzzlemod.relics.CursedCornerPiece;
 
 public class PuzzlerNeowEvent extends AbstractEvent {
     private static final Logger logger = LogManager.getLogger(PuzzlerNeowEvent.class.getName());

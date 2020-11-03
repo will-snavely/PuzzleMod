@@ -25,7 +25,7 @@ import org.barnhorse.puzzlemod.packs.DefaultPuzzleApplicator;
 import org.barnhorse.puzzlemod.packs.PuzzleApplicator;
 import org.barnhorse.puzzlemod.packs.model.PuzzlePack;
 import org.barnhorse.puzzlemod.relics.BagOfPieces;
-import theDefault.relics.CursedCornerPiece;
+import org.barnhorse.puzzlemod.relics.CursedCornerPiece;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -48,19 +48,35 @@ public class PuzzleMod implements
         EditCharactersSubscriber,
         PostInitializeSubscriber {
     public static final Logger logger = LogManager.getLogger(PuzzleMod.class.getName());
-    public static final Color DEFAULT_GRAY = CardHelper.getColor(64.0f, 70.0f, 70.0f);
 
+    // The color isn't really important, at the moment; it's a placeholder.
+    public static final Color DEFAULT_GRAY =
+            CardHelper.getColor(64.0f, 70.0f, 70.0f);
+
+    // Custom puzzles are stored in mods/etc/barnhorse/puzzlemod/puzzles
     private static final Path modWorkingPath = Paths
             .get("mods", "etc", "barnhorse", "puzzlemod")
             .toAbsolutePath();
     private static final Path puzzlesPath = modWorkingPath.resolve("puzzles");
+
+    // A reference to the currently active puzzle pack
     public static PuzzlePack currentPuzzlePack;
+
+    // The y position of the last, non-boss puzzle node.
     public static int lastPuzzleRow;
 
+    // A reference to a PuzzleApplicator, used to apply a given puzzle
+    // configuration to a room.
     private static PuzzleApplicator puzzleApplicator;
+
+    // If a puzzle has the __builtin__ prefix, it is loaded from a resource,
+    // instead of from disk.
     private static String builtinPuzzlePrefix = "__builtin__";
 
     public static final String selectedPuzzleFileSetting = "selectedPuzzleFile";
+
+    // Store the location of the puzzle file associated with the currently
+    // active run. This is preserved when saving (see PuzzleFileSave)
     public static String currentRunPuzzleFile;
 
     private static void createPuzzleDirectory() {
@@ -274,7 +290,9 @@ public class PuzzleMod implements
         try {
             SpireConfig config = getSpireConfig();
             config.load();
-            currentlyLoaded = config.getString(selectedPuzzleFileSetting);
+            currentlyLoaded = new PuzzleList.ListItem(
+                    config.getString(selectedPuzzleFileSetting)).getDisplay();
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -307,7 +325,6 @@ public class PuzzleMod implements
                 highlightColor,
                 "Select",
                 FontHelper.largeDialogOptionFont);
-
 
         settingsPanel.addUIElement(topLabel);
         settingsPanel.addUIElement(selector);
