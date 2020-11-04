@@ -1,5 +1,6 @@
 package org.barnhorse.puzzlemod.packs;
 
+import com.badlogic.gdx.math.Vector2;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +19,11 @@ import com.megacrit.cardcrawl.orbs.Plasma;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import org.barnhorse.puzzlemod.monsters.MonsterTemplates;
 import org.barnhorse.puzzlemod.monsters.PuzzleMonster;
+import org.barnhorse.puzzlemod.packs.layout.LayoutFactory;
+import org.barnhorse.puzzlemod.packs.layout.LinearLayout;
+import org.barnhorse.puzzlemod.packs.layout.MonsterLayout;
 import org.barnhorse.puzzlemod.packs.model.*;
 import org.barnhorse.puzzlemod.relics.BagOfPieces;
 import org.barnhorse.puzzlemod.relics.CursedCornerPiece;
@@ -89,9 +94,45 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
         }
 
         List<AbstractMonster> monsters = new ArrayList<>();
-        for (PuzzleMonsterInfo monsterInfo : puzzle.monsters) {
-            monsters.add(new PuzzleMonster(monsterInfo));
+        List<PuzzleMonsterInfo> monsterInfo = new ArrayList<>();
+        MonsterLayout layout = null;
+        if (puzzle.monsterGroup != null) {
+            monsterInfo = puzzle.monsterGroup.monsters;
+            if (puzzle.monsterGroup.layout != null) {
+                layout = LayoutFactory.createLayout(puzzle.monsterGroup.layout);
+            } else {
+                layout = new LinearLayout(60.f);
+            }
+        } else if (puzzle.monsters != null) {
+            monsterInfo = puzzle.monsters;
         }
+
+        for (PuzzleMonsterInfo info : monsterInfo) {
+            PuzzleMonster monster;
+            if (info.template != null && info.template != "") {
+                monster = MonsterTemplates.getTemplate(info.template);
+                monster.modify(info);
+            } else {
+                monster = new PuzzleMonster(info);
+            }
+            monsters.add(monster);
+        }
+
+        if (layout != null) {
+            float xMin = Settings.WIDTH * 0.70f - 500 * Settings.scale;
+            float xMax = Settings.WIDTH * 0.70f + 500 * Settings.scale;
+            float yMin = AbstractDungeon.floorY;
+            float yMax = AbstractDungeon.floorY - 500 * Settings.scale;
+            List<Vector2> positions = layout.layout(monsters, xMin, xMax, yMin, yMax);
+            for (int ii = 0; ii < monsters.size(); ii++) {
+                AbstractMonster monster = monsters.get(ii);
+                Vector2 position = positions.get(ii);
+                monster.drawY = position.y;
+                monster.drawX = position.x;
+                refreshHitboxLocation(monster);
+            }
+        }
+
         AbstractMonster[] monsterArray = new AbstractMonster[monsters.size()];
         monsters.toArray(monsterArray);
         room.monsters = new MonsterGroup(monsterArray);
@@ -185,5 +226,14 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
             result.add(card);
         }
         return result;
+    }
+
+    private void refreshHitboxLocation(AbstractMonster monster) {
+        monster.hb.move(
+                monster.drawX + monster.hb_x + monster.animX,
+                monster.drawY + monster.hb_y + monster.hb_h / 2.0F);
+        monster.healthHb.move(
+                monster.hb.cX,
+                monster.hb.cY - monster.hb_h / 2.0F - monster.healthHb.height / 2.0F);
     }
 }

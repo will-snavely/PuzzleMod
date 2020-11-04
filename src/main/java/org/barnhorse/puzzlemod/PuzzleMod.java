@@ -129,7 +129,7 @@ public class PuzzleMod implements
 
     private static List<String> getBuiltinPuzzles() {
         return Arrays.asList(
-                builtinPuzzle("demo.json")
+                builtinPuzzle("ironclad_basic.json")
         );
     }
 
@@ -139,7 +139,7 @@ public class PuzzleMod implements
 
     public static PuzzlePack loadPackFromSettings() {
         String descriptor;
-        String defaultPuzzle = builtinPuzzle("demo.json");
+        String defaultPuzzle = builtinPuzzle("ironclad_basic.json");
         try {
             SpireConfig config = getSpireConfig();
             config.load();
@@ -194,7 +194,7 @@ public class PuzzleMod implements
         Properties defaultSettings = new Properties();
         defaultSettings.setProperty(
                 selectedPuzzleFileSetting,
-                builtinPuzzle("demo.json"));
+                builtinPuzzle("ironclad_basic.json"));
         return new SpireConfig(
                 ModSettings.modId,
                 "puzzleModConfig",

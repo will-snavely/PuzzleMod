@@ -16,6 +16,7 @@ public class Puzzle {
     public List<PuzzleRelic> relics;
     public List<PuzzlePotion> potions;
     public List<PuzzleMonsterInfo> monsters;
+    public PuzzleMonsterGroup monsterGroup;
 
     public int orbSlots;
     public List<PuzzleOrb> orbs;
