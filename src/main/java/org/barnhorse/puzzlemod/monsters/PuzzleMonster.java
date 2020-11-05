@@ -49,12 +49,19 @@ public class PuzzleMonster extends AbstractMonster {
     public PuzzleMonster(PuzzleMonsterInfo info) {
         this(
                 info.name, info.maxHp,
-                info.hb_x, info.hb_y, info.hb_w, info.hb_h,
-                info.offsetX, info.offsetY,
-                info.dialogX, info.dialogY,
-                info.fade, info.damage,
+                info.hb_x != null ? info.hb_x : 0,
+                info.hb_y != null ? info.hb_y : 0,
+                info.hb_w != null ? info.hb_w : 0,
+                info.hb_h != null ? info.hb_h : 0,
+                info.offsetX != null ? info.offsetX : 0,
+                info.offsetY != null ? info.offsetY : 0,
+                info.dialogX != null ? info.dialogX : 0,
+                info.dialogY != null ? info.dialogY : 0,
+                info.fade != null ? info.fade : 0,
+                info.damage != null ? info.damage : 0,
                 info.entranceDialog, info.deathDialog,
-                info.atlasUrl, info.skeletonUrl, info.animation, info.scale);
+                info.atlasUrl, info.skeletonUrl, info.animation,
+                info.scale != null ? info.scale : 0);
     }
 
     @Override
@@ -120,31 +127,40 @@ public class PuzzleMonster extends AbstractMonster {
         if (info.name != null && !info.name.isEmpty()) {
             this.name = info.name;
         }
-        this.damage.clear();
-        this.damage.add(new DamageInfo(this, info.damage));
-        this.fade = info.fade;
-
-        if (info.maxHp > 0) {
+        if (info.damage != null) {
+            this.damage.clear();
+            this.damage.add(new DamageInfo(this, info.damage));
+        }
+        if (info.fade != null) {
+            this.fade = info.fade;
+        }
+        if (info.maxHp != null) {
             this.currentHealth = info.maxHp;
             this.maxHealth = info.maxHp;
         }
-        if (info.hb_x > 0) {
+        if (info.hb_x != null) {
             this.hb_x = info.hb_x;
         }
-        if (info.hb_y > 0) {
+        if (info.hb_y != null) {
             this.hb_y = info.hb_y;
         }
-        if (info.hb_w > 0) {
+        if (info.hb_w != null) {
             this.hb_w = info.hb_w;
         }
-        if (info.hb_h > 0) {
+        if (info.hb_h != null) {
             this.hb_h = info.hb_h;
         }
-        if (info.dialogX > 0) {
+        if (info.dialogX != null) {
             this.dialogX = info.dialogX * Settings.scale;
         }
-        if (info.dialogY > 0) {
+        if (info.dialogY != null) {
             this.dialogY = info.dialogY * Settings.scale;
+        }
+        if (info.offsetX != null) {
+            this.drawX = (float) Settings.WIDTH * 0.75F + info.offsetX * Settings.scale;
+        }
+        if (info.offsetY != null) {
+            this.drawY = AbstractDungeon.floorY + info.offsetY * Settings.scale;
         }
         if (info.entranceDialog != null && !info.entranceDialog.isEmpty()) {
             this.entranceDialog = info.entranceDialog;
@@ -154,8 +170,10 @@ public class PuzzleMonster extends AbstractMonster {
         }
         if (info.atlasUrl != null && !info.atlasUrl.isEmpty()
                 && info.skeletonUrl != null && !info.skeletonUrl.isEmpty()) {
-            float scale = info.scale > 0 ? info.scale : 1.0f;
+            float scale = info.scale != null ? info.scale : 1.0f;
             this.loadAnimation(info.atlasUrl, info.skeletonUrl, scale);
+        }
+        if (info.animation != null) {
             AnimationState.TrackEntry e =
                     this.state.setAnimation(0, info.animation, true);
             e.setTime(e.getEndTime() * MathUtils.random());

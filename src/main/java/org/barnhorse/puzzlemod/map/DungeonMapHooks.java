@@ -77,7 +77,8 @@ public class DungeonMapHooks {
     }
 
     private static float calculateMapSize() {
-        return Settings.MAP_DST_Y * 10.0F - 1420.0F * Settings.scale;
+        int puzzleCount = PuzzleMod.currentPuzzlePack.puzzles.size();
+        return Settings.MAP_DST_Y * (puzzleCount + 1) - 1380.0F * Settings.scale;
     }
 
     public static void show(DungeonMap map) {
@@ -182,8 +183,7 @@ public class DungeonMapHooks {
     }
 
     private static float getBossOffset() {
-        int puzzleCount = PuzzleMod.currentPuzzlePack.puzzles.size();
-        return puzzleCount * 161.0f * Settings.scale;
+        return 1416.0F * Settings.scale;
     }
 
     public static void renderBossIcon(DungeonMap map, SpriteBatch sb) {

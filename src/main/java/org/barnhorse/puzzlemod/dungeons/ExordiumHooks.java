@@ -105,7 +105,7 @@ public class ExordiumHooks {
             node = new MapRoomNode(-1, 15);
             node.room = new PuzzleBossRoom(pack.boss);
             AbstractDungeon.nextRoom = node;
-        } else if (saveFile.room_y == 15 && saveFile.room_x == -1) {
+        } else if (saveFile.current_room.equals(PuzzlerVictoryRoom.class.getName())) {
             node = new MapRoomNode(-1, 15);
             node.room = new PuzzlerVictoryRoom();
             AbstractDungeon.nextRoom = node;
@@ -119,9 +119,9 @@ public class ExordiumHooks {
         for (int i = 0; i < AbstractDungeon.pathX.size(); ++i) {
             int xPos = AbstractDungeon.pathX.get(i);
             int yPos = AbstractDungeon.pathY.get(i);
-            MapRoomNode cur = AbstractDungeon.map.get(yPos).get(xPos);
 
             if (yPos == PuzzleMod.lastPuzzleRow) {
+                MapRoomNode cur = AbstractDungeon.map.get(yPos).get(xPos);
                 for (MapEdge e : cur.getEdges()) {
                     if (e != null) {
                         e.markAsTaken();
@@ -130,6 +130,7 @@ public class ExordiumHooks {
             }
 
             if (yPos <= PuzzleMod.lastPuzzleRow) {
+                MapRoomNode cur = AbstractDungeon.map.get(yPos).get(xPos);
                 cur.taken = true;
                 if (node != null) {
                     MapEdge connectedEdge = node.getEdgeConnectedTo(cur);

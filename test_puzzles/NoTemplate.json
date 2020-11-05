@@ -1,0 +1,61 @@
+{
+  "name": "Demo",
+  "puzzles": [
+    {
+      "name": "Simple Attack",
+      "masterHandSize": 5,
+      "startingDrawPile": [
+        {
+          "key": "Strike_R"
+        }
+      ],
+      "maxHp": 20,
+      "curHp": 20,
+      "monsterGroup": {
+        "layout": {
+          "type": "manual"
+        },
+        "monsters": [
+          {
+            "name": "Cultist",
+            "maxHp": 46,
+            "damage": 24,
+            "hb_x": -8.0,
+            "hb_y": 10.0,
+            "hb_w": 230.0,
+            "hb_h": 240.0,
+            "dialogX": -50.0,
+            "dialogY": 50.0,
+            "offsetX": 0.0,
+            "offsetY": -10.0,
+            "atlasUrl": "images/monsters/theBottom/cultist/skeleton.atlas",
+            "skeletonUrl": "images/monsters/theBottom/cultist/skeleton.json",
+            "animation": "waving",
+            "scale": 1.0
+          }
+        ]
+      }
+    }
+  ],
+  "boss": {
+    "name": "Boss",
+    "masterHandSize": 5,
+    "startingDrawPile": [
+      {
+        "key": "Strike_R"
+      }
+    ],
+    "maxHp": 20,
+    "curHp": 20,
+    "monsterGroup": {
+      "monsters": [
+        {
+          "name": "Cultist1",
+          "template": "Cultist",
+          "maxHp": 6,
+          "damage": 20
+        }
+      ]
+    }
+  }
+}

@@ -112,6 +112,9 @@ public class DefaultPuzzleApplicator implements PuzzleApplicator {
             if (info.template != null && info.template != "") {
                 monster = MonsterTemplates.getTemplate(info.template);
                 monster.modify(info);
+
+                // In case the position changed, reset the hitbox
+                refreshHitboxLocation(monster);
             } else {
                 monster = new PuzzleMonster(info);
             }

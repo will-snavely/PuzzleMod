@@ -3,25 +3,24 @@ package org.barnhorse.puzzlemod.packs.model;
 public class PuzzleMonsterInfo {
     public String name;
     public String template;
-    public int maxHp;
-    public int fade;
-    public int damage;
+    public Integer maxHp;
+    public Integer fade;
+    public Integer damage;
 
-    public float hb_w;
-    public float hb_h;
-    public float dialogX;
-    public float dialogY;
-    public float offsetX;
-    public float offsetY;
+    public Float hb_w;
+    public Float hb_h;
+    public Float hb_x;
+    public Float hb_y;
+    public Float dialogX;
+    public Float dialogY;
+    public Float offsetX;
+    public Float offsetY;
 
     public String atlasUrl;
     public String skeletonUrl;
     public String animation;
-    public float scale;
+    public Float scale;
 
     public String entranceDialog;
     public String deathDialog;
-
-    public float hb_x;
-    public float hb_y;
 }
