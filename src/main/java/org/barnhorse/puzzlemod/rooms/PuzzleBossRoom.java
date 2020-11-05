@@ -58,6 +58,7 @@ public class PuzzleBossRoom extends MonsterRoomBoss {
                 this,
                 AbstractDungeon.player
         );
+        AbstractDungeon.lastCombatMetricKey = "Puzzle Boss";
         AbstractRoom.waitTimer = COMBAT_WAIT_TIME;
     }
 }

@@ -417,7 +417,7 @@
   "boss":     {
     "name": "Boss 1",
     "masterHandSize": 5,
-    "maxEnergy": 4,
+    "maxEnergy": 3,
     "startingDrawPile": [
       {
         "key": "Burning Pact",
